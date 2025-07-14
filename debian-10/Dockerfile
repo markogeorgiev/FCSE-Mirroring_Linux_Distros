@@ -1,9 +1,13 @@
 FROM debian:10
 
-RUN apt-get update && \
-    apt-get install -y rsync nginx cron && \
-    mkdir -p /var/www/html/debian-10 && \
-    touch /var/log/sync.log
+# Switch apt sources to archive.debian.org with trusted=yes to bypass no Release-file error
+RUN sed -i 's|deb.debian.org/debian|archive.debian.org/debian|g' /etc/apt/sources.list && \
+    sed -i 's|security.debian.org|archive.debian.org/debian-security|g' /etc/apt/sources.list && \
+    sed -i '/buster-updates/d' /etc/apt/sources.list && \
+    echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99no-check-valid-until
+
+RUN apt-get update && apt-get install -y rsync nginx cron && \
+    mkdir -p /var/www/html/debian-10 && touch /var/log/sync.log
 
 COPY sync.sh /usr/local/bin/sync.sh
 RUN chmod +x /usr/local/bin/sync.sh
