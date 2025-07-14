@@ -1,22 +1,4 @@
-version: '3'
-
 services:
-  arch-mirror:
-    build: ./arch
-    container_name: arch-mirror
-    ports:
-      - "8081:80"
-    volumes:
-      - arch_data:/var/www/html/arch
-
-  ubuntu-mirror:
-    build: ./ubuntu
-    container_name: ubuntu-mirror
-    ports:
-      - "8082:80"
-    volumes:
-      - ubuntu_data:/var/www/html/ubuntu
-  
   debian10-mirror:
     build: ./debian-10
     container_name: debian10-mirror
@@ -24,9 +6,13 @@ services:
       - "8083:80"
     volumes:
       - debian10_data:/var/www/html/debian-10
-
+  debian11-mirror:
+    build: ./debian-11
+    container_name: debian11-mirror
+    ports:
+      - "8084:80"
+    volumes:
+      - debian11_data:/var/www/html/debian-11
 
 volumes:
-  arch_data:
-  ubuntu_data:
   debian10_data:
