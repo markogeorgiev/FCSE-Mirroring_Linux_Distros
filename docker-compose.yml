@@ -16,3 +16,5 @@ services:
 
 volumes:
   debian10_data:
+  debian11_data:
+
