@@ -1,0 +1,12 @@
+mkdir debian-11 
+mkdir debian-12 
+mkdir debian-10 
+mkdir centos-5 
+mkdir centos-6 
+mkdir centos-7 
+mkdir ubuntu-24.04 
+mkdir ubuntu-22.04 
+mkdir ubuntu-20.04 
+mkdir ubuntu-18.04 
+mkdir ubuntu-16.04 
+mkdir ubuntu-14.04
