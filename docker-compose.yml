@@ -16,7 +16,17 @@ services:
       - "8082:80"
     volumes:
       - ubuntu_data:/var/www/html/ubuntu
+  
+  debian10-mirror:
+    build: ./debian-10
+    container_name: debian10-mirror
+    ports:
+      - "8083:80"
+    volumes:
+      - debian10_data:/var/www/html/debian-10
+
 
 volumes:
   arch_data:
   ubuntu_data:
+  debian10_data
