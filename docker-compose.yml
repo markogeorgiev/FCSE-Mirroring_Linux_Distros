@@ -29,4 +29,4 @@ services:
 volumes:
   arch_data:
   ubuntu_data:
-  debian10_data
+  debian10_data:
