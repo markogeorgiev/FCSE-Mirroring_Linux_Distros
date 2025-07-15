@@ -13,6 +13,12 @@ mkdir ubuntu-14.04
 
 =======
 
+sudo touch default.conf
+sudo touch Dockerfile 
+sudo touch nginx.conf
+sudo touch start.sh
+sudo touch sync.sh
+
 touch default.conf
 touch Dockerfile 
 touch nginx.conf

@@ -1,8 +1,8 @@
 FROM debian:bookworm
 
-RUN apt-get update && \
-    apt-get install -y rsync nginx cron && \
-    mkdir -p /var/www/html/debian-12 && \
+RUN apt update && \
+    apt install -y rsync nginx cron && \
+    mkdir -p /var/www/html/debian && \
     touch /var/log/sync.log
 
 COPY sync.sh /usr/local/bin/sync.sh
