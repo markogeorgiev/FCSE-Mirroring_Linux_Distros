@@ -32,9 +32,18 @@ services:
       - "8084:80"
     volumes:
       - centos_data:/var/www/html/centos
+  rocky-mirror:
+    build: ./rocky
+    container_name: rocky-mirror
+    ports:
+      - "8085:80"
+    volumes:
+      - rocky_data:/var/www/html/rocky
+
 
 volumes:
   arch_data:
   ubuntu_data:
   debian_data:
   centos_data:
+  rocky_data:
