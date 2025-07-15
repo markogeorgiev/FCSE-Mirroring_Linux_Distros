@@ -25,7 +25,16 @@ services:
     volumes:
       - debian_data:/var/www/html/debian
 
+  centos-mirror:
+    build: ./centos
+    container_name: centos-mirror
+    ports:
+      - "8084:80"
+    volumes:
+      - centos_data:/var/www/html/centos
+
 volumes:
   arch_data:
   ubuntu_data:
   debian_data:
+  centos_data:
