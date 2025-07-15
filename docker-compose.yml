@@ -13,6 +13,14 @@ services:
       - "8084:80"
     volumes:
       - debian11_data:/var/www/html/debian-11
+  debian12-mirror:
+    build: ./debian-12
+    container_name: debian12-mirror
+    ports:
+      - "8085:80"
+    volumes:
+      - debian12_data:/var/www/html/debian-12
+
 
 volumes:
   debian10_data:
