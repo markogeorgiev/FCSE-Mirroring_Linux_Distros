@@ -10,13 +10,8 @@ REMOTE="rsync://ftp.de.debian.org/debian"
 mkdir -p "$MIRROR_DIR/dists"
 mkdir -p "$MIRROR_DIR/pool"
 
-# Sync only dists for Debian 11 and 12
 rsync -a --delete --progress \
-  --include="bookworm*/" \
-  --include="bullseye*/" \
-  --include="README*" \
-  --exclude="*" \
-  "$REMOTE/dists/" "$MIRROR_DIR/dists/" >> /var/log/sync.log 2>&1
+  rsync://ftp.de.debian.org/debian/ /var/www/html/debian/
 
 # Sync the package pool
 rsync -a --delete --progress \
