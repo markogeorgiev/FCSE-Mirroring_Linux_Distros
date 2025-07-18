@@ -12,8 +12,6 @@ services:
       - /mirrordata/ubuntu:/var/www/html
       - /mirrordata/logs/ubuntu-sync.log:/var/log/mirror-sync.log
     restart: unless-stopped
-    ports:
-      - "18082:80"
 
   debian-mirror:
     build: ./mirror-sync
@@ -26,8 +24,6 @@ services:
       - /mirrordata/debian:/var/www/html
       - /mirrordata/logs/debian-sync.log:/var/log/mirror-sync.log
     restart: unless-stopped
-    ports:
-      - "18083:80"
 
   centos-mirror:
     build: ./mirror-sync
@@ -39,8 +35,6 @@ services:
       - /mirrordata/centos:/var/www/html
       - /mirrordata/logs/centos-sync.log:/var/log/mirror-sync.log
     restart: unless-stopped
-    ports:
-      - "18084:80"
 
   rocky-mirror:
     build: ./mirror-sync
@@ -52,5 +46,3 @@ services:
       - /mirrordata/rocky:/var/www/html
       - /mirrordata/logs/rocky-sync.log:/var/log/mirror-sync.log
     restart: unless-stopped
-    ports:
-      - "18085:80"
