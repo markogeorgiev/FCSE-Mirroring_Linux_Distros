@@ -24,3 +24,6 @@ touch Dockerfile
 touch nginx.conf
 touch start.sh
 touch sync.sh
+
+rsync-ot da e vo docker ama da mountiram od /mirrordata
+

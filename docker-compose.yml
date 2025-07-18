@@ -1,49 +1,28 @@
-version: '3'
+version: '3.8'
 
 services:
-  arch-mirror:
-    build: ./arch
-    container_name: arch-mirror
-    ports:
-      - "8081:80"
-    volumes:
-      - arch_data:/var/www/html/arch
-
   ubuntu-mirror:
-    build: ./ubuntu
+    build: ./mirror-sync
     container_name: ubuntu-mirror
-    ports:
-      - "8082:80"
+    environment:
+      - MIRROR_NAME=ubuntu
+      - MIRROR_DIR=/var/www/html
+      - UPSTREAM=rsync://ubuntu.ethz.ch/ubuntu/
     volumes:
-      - ubuntu_data:/var/www/html/ubuntu
+      - /mirrordata/ubuntu:/var/www/html
+    restart: unless-stopped
+    ports:
+      - "18082:80"
 
   debian-mirror:
-    build: ./debian
+    build: ./mirror-sync
     container_name: debian-mirror
-    ports:
-      - "8083:80"
+    environment:
+      - MIRROR_NAME=debian
+      - MIRROR_DIR=/var/www/html
+      - UPSTREAM=rsync://ubuntu.ethz.ch/debian/
     volumes:
-      - debian_data:/var/www/html/debian
-
-  centos-mirror:
-    build: ./centos
-    container_name: centos-mirror
+      - /mirrordata/debian:/var/www/html
+    restart: unless-stopped
     ports:
-      - "8084:80"
-    volumes:
-      - centos_data:/var/www/html/centos
-  rocky-mirror:
-    build: ./rocky
-    container_name: rocky-mirror
-    ports:
-      - "8085:80"
-    volumes:
-      - rocky_data:/var/www/html/rocky
-
-
-volumes:
-  arch_data:
-  ubuntu_data:
-  debian_data:
-  centos_data:
-  rocky_data:
+      - "18083:80"
