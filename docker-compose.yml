@@ -38,4 +38,16 @@ services:
     restart: unless-stopped
     ports:
       - "18084:80"
+  
+  rocky-mirror:
+    build: ./mirror-sync
+    container_name: rocky-mirror
+    environment:
+      - MIRROR_NAME=rocky
+      - MIRROR_DIR=/var/www/html
+    volumes:
+      - /mirrordata/rocky:/var/www/html
+    restart: unless-stopped
+    ports:
+      - "18085:80"
 
