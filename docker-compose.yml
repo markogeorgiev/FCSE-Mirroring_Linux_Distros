@@ -26,3 +26,16 @@ services:
     restart: unless-stopped
     ports:
       - "18083:80"
+    
+    centos-mirror:
+      build: ./mirror-sync
+      container_name: centos-mirror
+      environment:
+        - MIRROR_NAME=centos
+        - MIRROR_DIR=/var/www/html
+      volumes:
+        - /mirrordata/centos:/var/www/html
+      restart: unless-stopped
+      ports:
+        - "18084:80"
+
