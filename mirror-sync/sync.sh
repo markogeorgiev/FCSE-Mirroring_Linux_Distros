@@ -6,7 +6,7 @@ echo "[$(date)] sync.sh started for $MIRROR_NAME" >> /var/log/sync.log
 # CentOS vault mirror
 CENTOS_BASE="rsync://archive.kernel.org/centos-vault"
 # Rocky Linux vault mirror
-ROCKY_BASE="rsync://fra.msync.rockylinux.org/rocky-vault"
+ROCKY_BASE="rsync://dl.rockylinux.org/pub/rocky"
 
 if [[ "$MIRROR_NAME" == "centos" ]]; then
   mkdir -p "$MIRROR_DIR/5.11" "$MIRROR_DIR/6.10" "$MIRROR_DIR/7"

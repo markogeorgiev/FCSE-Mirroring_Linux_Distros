@@ -10,6 +10,7 @@ services:
       - UPSTREAM=rsync://ubuntu.ethz.ch/ubuntu/
     volumes:
       - /mirrordata/ubuntu:/var/www/html
+      - /mirrordata/logs/ubuntu-sync.log:/var/log/mirror-sync.log
     restart: unless-stopped
     ports:
       - "18082:80"
@@ -23,10 +24,11 @@ services:
       - UPSTREAM=rsync://ubuntu.ethz.ch/debian/
     volumes:
       - /mirrordata/debian:/var/www/html
+      - /mirrordata/logs/debian-sync.log:/var/log/mirror-sync.log
     restart: unless-stopped
     ports:
       - "18083:80"
-    
+
   centos-mirror:
     build: ./mirror-sync
     container_name: centos-mirror
@@ -35,10 +37,11 @@ services:
       - MIRROR_DIR=/var/www/html
     volumes:
       - /mirrordata/centos:/var/www/html
+      - /mirrordata/logs/centos-sync.log:/var/log/mirror-sync.log
     restart: unless-stopped
     ports:
       - "18084:80"
-  
+
   rocky-mirror:
     build: ./mirror-sync
     container_name: rocky-mirror
@@ -47,7 +50,7 @@ services:
       - MIRROR_DIR=/var/www/html
     volumes:
       - /mirrordata/rocky:/var/www/html
+      - /mirrordata/logs/rocky-sync.log:/var/log/mirror-sync.log
     restart: unless-stopped
     ports:
       - "18085:80"
-
