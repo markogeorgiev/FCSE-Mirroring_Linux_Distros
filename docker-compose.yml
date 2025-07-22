@@ -1,48 +1,201 @@
 version: '3.8'
 
 services:
-  ubuntu-mirror:
+  # Debian Mirrors
+  debian10:
     build: ./mirror-sync
-    container_name: ubuntu-mirror
+    container_name: debian10
     environment:
-      - MIRROR_NAME=ubuntu
+      - MIRROR_NAME=debian10
       - MIRROR_DIR=/var/www/html
-      - UPSTREAM=rsync://ubuntu.ethz.ch/ubuntu/
-    volumes:
-      - /mirrordata/ubuntu:/var/www/html
-      - /mirrordata/logs/ubuntu-sync.log:/var/log/mirror-sync.log
-    restart: unless-stopped
-
-  debian-mirror:
-    build: ./mirror-sync
-    container_name: debian-mirror
-    environment:
-      - MIRROR_NAME=debian
-      - MIRROR_DIR=/var/www/html
-      - UPSTREAM=rsync://ubuntu.ethz.ch/debian/
+      - UPSTREAM=rsync://rsync.archive.debian.org/debian-archive/debian/dists/
+      - DISTRO_FILTER=buster
     volumes:
       - /mirrordata/debian:/var/www/html
-      - /mirrordata/logs/debian-sync.log:/var/log/mirror-sync.log
+      - /mirrordata/logs/debian10-sync.log:/var/log/mirror-sync.log
     restart: unless-stopped
 
-  centos-mirror:
+  debian11:
     build: ./mirror-sync
-    container_name: centos-mirror
+    container_name: debian11
     environment:
-      - MIRROR_NAME=centos
+      - MIRROR_NAME=debian11
       - MIRROR_DIR=/var/www/html
+      - UPSTREAM=rsync://ftp.de.debian.org/debian/
+      - DISTRO_FILTER=bullseye
+    volumes:
+      - /mirrordata/debian:/var/www/html
+      - /mirrordata/logs/debian11-sync.log:/var/log/mirror-sync.log
+    restart: unless-stopped
+
+  debian12:
+    build: ./mirror-sync
+    container_name: debian12
+    environment:
+      - MIRROR_NAME=debian12
+      - MIRROR_DIR=/var/www/html
+      - UPSTREAM=rsync://ftp.de.debian.org/debian/
+      - DISTRO_FILTER=bookworm
+    volumes:
+      - /mirrordata/debian:/var/www/html
+      - /mirrordata/logs/debian12-sync.log:/var/log/mirror-sync.log
+    restart: unless-stopped
+
+  # Ubuntu Mirrors
+  ubuntu1404:
+    build: ./mirror-sync
+    container_name: ubuntu1404
+    environment:
+      - MIRROR_NAME=ubuntu1404
+      - MIRROR_DIR=/var/www/html
+      - UPSTREAM=rsync://ubuntu.ethz.ch/ubuntu/
+      - DISTRO_FILTER=trusty
+    volumes:
+      - /mirrordata/ubuntu:/var/www/html
+      - /mirrordata/logs/ubuntu1404-sync.log:/var/log/mirror-sync.log
+    restart: unless-stopped
+
+  ubuntu1604:
+    build: ./mirror-sync
+    container_name: ubuntu1604
+    environment:
+      - MIRROR_NAME=ubuntu1604
+      - MIRROR_DIR=/var/www/html
+      - UPSTREAM=rsync://ubuntu.ethz.ch/ubuntu/
+      - DISTRO_FILTER=xenial
+    volumes:
+      - /mirrordata/ubuntu:/var/www/html
+      - /mirrordata/logs/ubuntu1604-sync.log:/var/log/mirror-sync.log
+    restart: unless-stopped
+
+  ubuntu1804:
+    build: ./mirror-sync
+    container_name: ubuntu1804
+    environment:
+      - MIRROR_NAME=ubuntu1804
+      - MIRROR_DIR=/var/www/html
+      - UPSTREAM=rsync://ubuntu.ethz.ch/ubuntu/
+      - DISTRO_FILTER=bionic
+    volumes:
+      - /mirrordata/ubuntu:/var/www/html
+      - /mirrordata/logs/ubuntu1804-sync.log:/var/log/mirror-sync.log
+    restart: unless-stopped
+
+  ubuntu2004:
+    build: ./mirror-sync
+    container_name: ubuntu2004
+    environment:
+      - MIRROR_NAME=ubuntu2004
+      - MIRROR_DIR=/var/www/html
+      - UPSTREAM=rsync://ubuntu.ethz.ch/ubuntu/
+      - DISTRO_FILTER=focal
+    volumes:
+      - /mirrordata/ubuntu:/var/www/html
+      - /mirrordata/logs/ubuntu2004-sync.log:/var/log/mirror-sync.log
+    restart: unless-stopped
+
+  ubuntu2204:
+    build: ./mirror-sync
+    container_name: ubuntu2204
+    environment:
+      - MIRROR_NAME=ubuntu2204
+      - MIRROR_DIR=/var/www/html
+      - UPSTREAM=rsync://ubuntu.ethz.ch/ubuntu/
+      - DISTRO_FILTER=jammy
+    volumes:
+      - /mirrordata/ubuntu:/var/www/html
+      - /mirrordata/logs/ubuntu2204-sync.log:/var/log/mirror-sync.log
+    restart: unless-stopped
+
+  ubuntu2404:
+    build: ./mirror-sync
+    container_name: ubuntu2404
+    environment:
+      - MIRROR_NAME=ubuntu2404
+      - MIRROR_DIR=/var/www/html
+      - UPSTREAM=rsync://ubuntu.ethz.ch/ubuntu/
+      - DISTRO_FILTER=noble
+    volumes:
+      - /mirrordata/ubuntu:/var/www/html
+      - /mirrordata/logs/ubuntu2404-sync.log:/var/log/mirror-sync.log
+    restart: unless-stopped
+
+  # CentOS Versions
+  centos511:
+    build: ./mirror-sync
+    container_name: centos511
+    environment:
+      - MIRROR_NAME=centos511
+      - MIRROR_DIR=/var/www/html
+      - UPSTREAM=rsync://archive.kernel.org/centos-vault
+      - DISTRO_FILTER=5.11
     volumes:
       - /mirrordata/centos:/var/www/html
-      - /mirrordata/logs/centos-sync.log:/var/log/mirror-sync.log
+      - /mirrordata/logs/centos511-sync.log:/var/log/mirror-sync.log
     restart: unless-stopped
 
-  rocky-mirror:
+  centos610:
     build: ./mirror-sync
-    container_name: rocky-mirror
+    container_name: centos610
     environment:
-      - MIRROR_NAME=rocky
+      - MIRROR_NAME=centos610
       - MIRROR_DIR=/var/www/html
+      - UPSTREAM=rsync://archive.kernel.org/centos-vault
+      - DISTRO_FILTER=6.10
+    volumes:
+      - /mirrordata/centos:/var/www/html
+      - /mirrordata/logs/centos610-sync.log:/var/log/mirror-sync.log
+    restart: unless-stopped
+
+  centos70:
+    build: ./mirror-sync
+    container_name: centos70
+    environment:
+      - MIRROR_NAME=centos70
+      - MIRROR_DIR=/var/www/html
+      - UPSTREAM=rsync://archive.kernel.org/centos-vault
+      - DISTRO_FILTER=7.0
+    volumes:
+      - /mirrordata/centos:/var/www/html
+      - /mirrordata/logs/centos70-sync.log:/var/log/mirror-sync.log
+    restart: unless-stopped
+
+  # Rocky Versions
+  rocky810:
+    build: ./mirror-sync
+    container_name: rocky810
+    environment:
+      - MIRROR_NAME=rocky810
+      - MIRROR_DIR=/var/www/html
+      - UPSTREAM=rsync://mirror1.hs-esslingen.de/rocky
+      - DISTRO_FILTER=8.10
     volumes:
       - /mirrordata/rocky:/var/www/html
-      - /mirrordata/logs/rocky-sync.log:/var/log/mirror-sync.log
+      - /mirrordata/logs/rocky810-sync.log:/var/log/mirror-sync.log
+    restart: unless-stopped
+
+  rocky96:
+    build: ./mirror-sync
+    container_name: rocky96
+    environment:
+      - MIRROR_NAME=rocky96
+      - MIRROR_DIR=/var/www/html
+      - UPSTREAM=rsync://mirror1.hs-esslingen.de/rocky
+      - DISTRO_FILTER=9.6
+    volumes:
+      - /mirrordata/rocky:/var/www/html
+      - /mirrordata/logs/rocky96-sync.log:/var/log/mirror-sync.log
+    restart: unless-stopped
+
+  rocky10:
+    build: ./mirror-sync
+    container_name: rocky10
+    environment:
+      - MIRROR_NAME=rocky10
+      - MIRROR_DIR=/var/www/html
+      - UPSTREAM=rsync://mirror1.hs-esslingen.de/rocky
+      - DISTRO_FILTER=10
+    volumes:
+      - /mirrordata/rocky:/var/www/html
+      - /mirrordata/logs/rocky10-sync.log:/var/log/mirror-sync.log
     restart: unless-stopped

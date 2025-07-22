@@ -1,21 +1,12 @@
-FROM debian:bookworm
+# Dockerfile for mirror-sync container with cron
+FROM alpine:latest
 
-RUN apt-get update && \
-    apt-get install -y rsync nginx-light cron && \
-    mkdir -p /var/www/html && \
-    touch /var/log/sync.log
+RUN apk add --no-cache rsync bash curl coreutils tzdata
 
-COPY sync.sh /usr/local/bin/sync.sh
-RUN chmod +x /usr/local/bin/sync.sh
+COPY sync.sh /scripts/sync.sh
+RUN chmod +x /scripts/sync.sh
 
-COPY start.sh /start.sh
-RUN chmod +x /start.sh
+# Set up crontab to run sync.sh every 6 hours
+RUN echo "0 */6 * * * /scripts/sync.sh >> /var/log/mirror-sync.log 2>&1" > /etc/crontabs/root
 
-COPY nginx.conf /etc/nginx/nginx.conf
-
-# Create the cron job
-RUN printf 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\n'\
-          '0 * * * * root /usr/local/bin/sync.sh >> /var/log/sync.log 2>&1\n' \
-          > /etc/cron.d/mirrorcron && chmod 0644 /etc/cron.d/mirrorcron
-
-CMD ["/start.sh"]
+CMD ["crond", "-f"]
