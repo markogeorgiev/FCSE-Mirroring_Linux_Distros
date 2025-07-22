@@ -12,7 +12,7 @@ services:
       - DISTRO_FILTER=buster
     volumes:
       - /mirrordata/debian:/var/www/html
-      - /mirrordata/logs/debian10-sync.log:/var/log/mirror-sync.log
+      - /mirrordata/logs:/var/log
     restart: unless-stopped
 
   debian11:
@@ -25,7 +25,7 @@ services:
       - DISTRO_FILTER=bullseye
     volumes:
       - /mirrordata/debian:/var/www/html
-      - /mirrordata/logs/debian11-sync.log:/var/log/mirror-sync.log
+      - /mirrordata/logs:/var/log
     restart: unless-stopped
 
   debian12:
@@ -38,7 +38,7 @@ services:
       - DISTRO_FILTER=bookworm
     volumes:
       - /mirrordata/debian:/var/www/html
-      - /mirrordata/logs/debian12-sync.log:/var/log/mirror-sync.log
+      - /mirrordata/logs:/var/log
     restart: unless-stopped
 
   # Ubuntu Mirrors
@@ -52,7 +52,7 @@ services:
       - DISTRO_FILTER=trusty
     volumes:
       - /mirrordata/ubuntu:/var/www/html
-      - /mirrordata/logs/ubuntu1404-sync.log:/var/log/mirror-sync.log
+      - /mirrordata/logs:/var/log
     restart: unless-stopped
 
   ubuntu1604:
@@ -65,7 +65,7 @@ services:
       - DISTRO_FILTER=xenial
     volumes:
       - /mirrordata/ubuntu:/var/www/html
-      - /mirrordata/logs/ubuntu1604-sync.log:/var/log/mirror-sync.log
+      - /mirrordata/logs:/var/log
     restart: unless-stopped
 
   ubuntu1804:
@@ -78,7 +78,7 @@ services:
       - DISTRO_FILTER=bionic
     volumes:
       - /mirrordata/ubuntu:/var/www/html
-      - /mirrordata/logs/ubuntu1804-sync.log:/var/log/mirror-sync.log
+      - /mirrordata/logs:/var/log
     restart: unless-stopped
 
   ubuntu2004:
@@ -91,7 +91,7 @@ services:
       - DISTRO_FILTER=focal
     volumes:
       - /mirrordata/ubuntu:/var/www/html
-      - /mirrordata/logs/ubuntu2004-sync.log:/var/log/mirror-sync.log
+      - /mirrordata/logs:/var/log
     restart: unless-stopped
 
   ubuntu2204:
@@ -104,7 +104,7 @@ services:
       - DISTRO_FILTER=jammy
     volumes:
       - /mirrordata/ubuntu:/var/www/html
-      - /mirrordata/logs/ubuntu2204-sync.log:/var/log/mirror-sync.log
+      - /mirrordata/logs:/var/log
     restart: unless-stopped
 
   ubuntu2404:
@@ -117,7 +117,7 @@ services:
       - DISTRO_FILTER=noble
     volumes:
       - /mirrordata/ubuntu:/var/www/html
-      - /mirrordata/logs/ubuntu2404-sync.log:/var/log/mirror-sync.log
+      - /mirrordata/logs:/var/log
     restart: unless-stopped
 
   # CentOS Versions
@@ -131,7 +131,7 @@ services:
       - DISTRO_FILTER=5.11
     volumes:
       - /mirrordata/centos:/var/www/html
-      - /mirrordata/logs/centos511-sync.log:/var/log/mirror-sync.log
+      - /mirrordata/logs:/var/log
     restart: unless-stopped
 
   centos610:
@@ -144,7 +144,7 @@ services:
       - DISTRO_FILTER=6.10
     volumes:
       - /mirrordata/centos:/var/www/html
-      - /mirrordata/logs/centos610-sync.log:/var/log/mirror-sync.log
+      - /mirrordata/logs:/var/log
     restart: unless-stopped
 
   centos70:
@@ -157,7 +157,7 @@ services:
       - DISTRO_FILTER=7.0
     volumes:
       - /mirrordata/centos:/var/www/html
-      - /mirrordata/logs/centos70-sync.log:/var/log/mirror-sync.log
+      - /mirrordata/logs:/var/log
     restart: unless-stopped
 
   # Rocky Versions
@@ -171,7 +171,7 @@ services:
       - DISTRO_FILTER=8.10
     volumes:
       - /mirrordata/rocky:/var/www/html
-      - /mirrordata/logs/rocky810-sync.log:/var/log/mirror-sync.log
+      - /mirrordata/logs:/var/log
     restart: unless-stopped
 
   rocky96:
@@ -184,7 +184,7 @@ services:
       - DISTRO_FILTER=9.6
     volumes:
       - /mirrordata/rocky:/var/www/html
-      - /mirrordata/logs/rocky96-sync.log:/var/log/mirror-sync.log
+      - /mirrordata/logs:/var/log
     restart: unless-stopped
 
   rocky10:
@@ -197,5 +197,5 @@ services:
       - DISTRO_FILTER=10
     volumes:
       - /mirrordata/rocky:/var/www/html
-      - /mirrordata/logs/rocky10-sync.log:/var/log/mirror-sync.log
+      - /mirrordata/logs:/var/log
     restart: unless-stopped
