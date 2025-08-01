@@ -193,7 +193,7 @@ services:
     environment:
       - MIRROR_NAME=rocky10
       - MIRROR_DIR=/var/www/html
-      - UPSTREAM=rsync://mirror1.hs-esslingen.de/rocky
+      - UPSTREAM=rsync://ftp.fau.de/rockylinux/
       - DISTRO_FILTER=10
     volumes:
       - /mirrordata/rocky:/var/www/html
