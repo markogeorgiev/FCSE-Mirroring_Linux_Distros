@@ -194,7 +194,7 @@ services:
       - MIRROR_NAME=rocky10
       - MIRROR_DIR=/var/www/html
       - UPSTREAM=rsync://ftp.fau.de/rockylinux/
-      - DISTRO_FILTER=10
+      - DISTRO_FILTER=10.0
     volumes:
       - /mirrordata/rocky:/var/www/html
       - /mirrordata/logs:/var/log
