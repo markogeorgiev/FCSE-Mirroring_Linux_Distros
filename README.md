@@ -1,68 +1,28 @@
-# mirror-docker
+# mirror-docker-v2
 
-A simple and extensible Linux mirror server powered by Docker, rsync, and nginx.
+This repository is a modernized, more flexible version of [LunaStev's mirror-docker](https://github.com/LunaStev/mirror-docker). It provides a lightweight, Docker-based solution for setting up customizable Linux distribution mirrors.
 
-This project allows you to deploy your own Arch Linux and Ubuntu mirror servers using Docker. It automatically syncs with official upstream mirrors using `rsync`, and serves the contents via `nginx`. All components are containerized, cron-scheduled, and easy to manage or extend.
+## Overview
 
----
+Each mirror runs in its own Docker container, one per version of the distro you want to mirror. The setup is based on a generic `Dockerfile` and a shared sync script located in the `mirror-sync/` directory. Configuration is handled via environment variables defined in `docker-compose.yml`.
 
-## ✅ Features
+## Adding a New Distro Version
 
-- 🔄 Automatic synchronization via `rsync` with upstream mirrors
-- 🕒 Periodic syncing handled by `cron`
-- 📁 Directory listing via `nginx` with autoindex enabled
-- 🐳 Dockerized: Easy to deploy, rebuild, or expand
-- ⚙️ Supports Arch Linux and Ubuntu (extensible to others)
-- 🖥️ Ready for reverse proxy and domain-based access
+To mirror a new distribution or version:
 
----
+1. Use `rsync --list-only [URL]` to explore available versions and select the one you want to mirror.
+2. Copy an existing service definition in `docker-compose.yml` and update the following environment variables:
 
-## 📦 Requirements
+   * `MIRROR_NAME`: a short name for this mirror
+   * `MIRROR_DIR`: target directory inside the container (e.g. `/var/www/html/ubuntu/` if your distro is Ubuntu)
+   * `UPSTREAM`: the full rsync URL of the upstream mirror
+   * `DISTRO_FILTER`: choose which specific version you want to mirror (e.g. choose `jammy` for Ubuntu 22.04 or `10.0` for Rocky 10.0)
+3. Configure the `volumes:` section so that the local path reflects the mirror hierarchy.
+   Example: for Ubuntu 22.04, use
 
-- Docker
-- Docker Compose
-- Basic shell or CMD environment
+   ```yaml
+   - /mirrordata/ubuntu:/var/www/html
+   ```
 
----
-
-## 🚀 Getting Started
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/LunaStev/mirror-docker.git
-cd mirror-docker
-```
-
-### 2. Run
-On Linux/macOS:
-
-```bash
-./docstart.sh
-```
-
-On Windows (CMD):
-
-```cmd
-docstart.bat
-```
-
-This will build and run both Arch and Ubuntu mirror containers in the background.
-
----
-
-## 🌐 Access URLs
-- Arch mirror: http://localhost:8081
-- Ubuntu mirror: http://localhost:8082
-
----
-
-## ✍️ Customizing
-- Change `REMOTE` in `sync.sh` to select your preferred upstream rsync mirror
-- Modify nginx settings via `default.conf` or `nginx.conf`
-- Add TLS or domain routing by configuring a reverse proxy on the host machine
-
----
-
-## 📄 License
-[MIT License](LICENSE)
+   This ensures the mirrored files for all Ubuntu versions live under `/mirrordata/ubuntu/`.
+4. (Optional) If you don’t need logging inside the container, you can remove the log volume mount from both the `docker-compose.yml` service and from `sync.sh`.
