@@ -12,14 +12,14 @@ echo "[$(date)] Syncing $MIRROR_NAME from $UPSTREAM" >> "$log_file"
 
 if [ -n "$DISTRO_FILTER" ]; then
   rsync -aH --delete \
+    --chown=www-data:www-data \
     --include="$DISTRO_FILTER/" \
     --include="$DISTRO_FILTER/**" \
     --exclude='*' \
     "$UPSTREAM" "$MIRROR_DIR" >> "$log_file" 2>&1
 else
-  rsync -aH --delete "$UPSTREAM" "$MIRROR_DIR" >> "$log_file" 2>&1
+  rsync -aH --delete --chown=www-data:www-data \
+    "$UPSTREAM" "$MIRROR_DIR" >> "$log_file" 2>&1
 fi
-
-chown -R www-data:www-data "$MIRROR_DIR"
 
 echo "[$(date)] Completed $MIRROR_NAME" >> "$log_file"
